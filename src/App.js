@@ -1,4 +1,6 @@
+import {TextArea} from "./components/Style.js";
 import "./App.css";
+import {useState} from "react";
 
 const styles = {
   bold: { fontWeight: "bold" },
@@ -11,8 +13,20 @@ const stylings = ["bold", "italic", "underline"];
 const colors = ["yellow", "blue", "red", "black", "purple"];
 
 function App() {
+
+  const [textStyle, setStyle] = useState("");
+  const [textColor, setColor] = useState("");
+
+  const styling = () => {
+    setStyle(textStyle);
+  }
+
+  const coloring = () => {
+    setColor(textColor);
+  }
+
   const stylingBoxes = stylings.map((style) => (
-    <button className="btn btn-light" style={styles[style]} key={style}>
+    <button className="btn btn-light" style={styles[style]} key={style} textStyle = {style} onClick={styling(textStyle)}>
       {style}
     </button>
   ));
@@ -21,13 +35,16 @@ function App() {
     <button
       style={{ backgroundColor: color, height: 30, width: 30 }}
       key={color}
+      textColor = {color}
+      onClick={coloring(textColor)}
     />
   ));
+
 
   return (
     <div className="App">
       <div className="my-3">{stylingBoxes}</div>
-      <textarea />
+      <TextArea />
       <div className="my-3">{colorBoxes}</div>
     </div>
   );
